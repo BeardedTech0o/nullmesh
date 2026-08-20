@@ -7,7 +7,7 @@ const S = {
   filter:'all', startTime:null, selectedNode:null,
   uptimeTimer:null, wsTimer:null,
   // UI shell state
-  page:'messages', peerFilter:'all', everConnected:false, accent:'lime',
+  page:'messages', peerFilter:'all', everConnected:false,
   // Config page state — one entry per config section (see CFG_SECTIONS)
   configs:{}, configEnums:null, configTab:'device', configModuleTab:'mqtt', configDirty:{},
   logs:[],
@@ -46,7 +46,7 @@ function connectWS() {
   S.ws.onopen = () => {
     clearInterval(S.wsTimer);
     S.wsTimer = setInterval(() => { try { S.ws.send(JSON.stringify({type:'ping'})); } catch {} }, 20000);
-    sysMsg('Connected to Meshnatter server');
+    sysMsg('Connected to Nullmesh server');
   };
   S.ws.onclose = () => { clearInterval(S.wsTimer); sysMsg('Reconnecting...'); setTimeout(connectWS, 2000); };
   S.ws.onerror = () => {};
@@ -531,14 +531,14 @@ function renderChannelHeader(){
 function renderDMThread(){
   renderDMHeader();
   const id=S.activeDM;
-  let title='Meshnatter', sub='Connect to get started';
+  let title='Nullmesh', sub='Connect to get started';
   if(id){ const num=parseInt(id.slice(3)); title=S.nodes[num]?.name||numToId(num); sub='No messages — say something!'; }
   renderThreadInto('msgFeed', id, title, sub);
 }
 function renderChannelThread(){
   renderChannelHeader();
   const id=S.activeChannel;
-  let title='Meshnatter', sub='Select a channel on the left to see its broadcasts';
+  let title='Nullmesh', sub='Select a channel on the left to see its broadcasts';
   if(id){ const idx=parseInt(id.slice(3)); title=S.channels[idx]?.name||'Channel'; sub='No messages yet'; }
   renderThreadInto('msgFeed2', id, title, sub);
 }
@@ -900,7 +900,6 @@ const PAGES = {
   config:   { section:'pageConfig',   nav:'navBtnConfig' },
   channels: { section:'pageChannels', nav:'tabBtnChannels' },
   peers:    { section:'pagePeers',    nav:'navBtnPeers' },
-  settings: { section:'pageSettings', nav:'navBtnSettings' },
 };
 
 function navigate(page) {
@@ -918,7 +917,6 @@ function navigate(page) {
   if (page === 'channels') { clearBadge('tabBadgeChannels'); renderChannelsList(); }
   if (page === 'peers')    renderPeers();
   if (page === 'config')   renderConfigPage();
-  if (page === 'settings') renderSettingsPage();
   if (page === 'map' && typeof map !== 'undefined') setTimeout(() => map.invalidateSize(), 80);
 }
 
@@ -947,13 +945,13 @@ function updateIdentity() {
   if (!nameEl || !subEl) return;
   const me = S.myNodeNum != null ? S.nodes[S.myNodeNum] : null;
   if (S.connected && me) {
-    nameEl.textContent = me.shortName && me.shortName !== '???' ? me.shortName : (me.name || 'Meshnatter');
+    nameEl.textContent = me.shortName && me.shortName !== '???' ? me.shortName : (me.name || 'Nullmesh');
     subEl.textContent  = 'Meshtastic ' + (me.name || numToId(me.num));
   } else if (S.connected && S.myNodeNum != null) {
     nameEl.textContent = numToId(S.myNodeNum);
     subEl.textContent  = 'Meshtastic node';
   } else {
-    nameEl.textContent = 'Meshnatter';
+    nameEl.textContent = 'Nullmesh';
     subEl.textContent  = 'No node connected';
   }
 }
@@ -998,62 +996,6 @@ function firstRunConnect() {
   }, 6000);
 }
 
-// ── Theme ────────────────────────────────────────────────────────
-function applyTheme(theme) {
-  const light = theme === 'light';
-  document.body.classList.toggle('theme-light', light);
-  const ic = document.getElementById('railThemeIcon');
-  if (ic) ic.textContent = light ? 'dark_mode' : 'light_mode';
-  const btn = document.getElementById('railTheme');
-  if (btn) btn.title = light ? 'Switch to dark theme' : 'Switch to light theme';
-  const segDark = document.getElementById('themeSegDark');
-  const segLight = document.getElementById('themeSegLight');
-  if (segDark) segDark.classList.toggle('active', !light);
-  if (segLight) segLight.classList.toggle('active', light);
-  try { localStorage.setItem('mn_theme', light ? 'light' : 'dark'); } catch {}
-  if (typeof map !== 'undefined') setTimeout(() => map.invalidateSize(), 60);
-}
-function toggleTheme() {
-  applyTheme(document.body.classList.contains('theme-light') ? 'dark' : 'light');
-}
-
-// ══════════════════════════════════════════════════════════════════
-// SETTINGS — accent colour
-// ══════════════════════════════════════════════════════════════════
-// Aurora accent pairs — each swatch is a {from, to} gradient, matching the
-// lime/teal pairing already used for the default brand gradient.
-const ACCENT_COLORS = [
-  { id:'lime',   name:'Lime',   hex:'#c6ff4a', hex2:'#34e0a1' },
-  { id:'blue',   name:'Blue',   hex:'#4ac8ff', hex2:'#7c5cff' },
-  { id:'violet', name:'Violet', hex:'#9c7cff', hex2:'#ff6bcb' },
-  { id:'coral',  name:'Coral',  hex:'#ff8a5c', hex2:'#ffd166' },
-  { id:'teal',   name:'Teal',   hex:'#34e0a1', hex2:'#4ac8ff' },
-  { id:'pink',   name:'Pink',   hex:'#ff6bcb', hex2:'#ff8a5c' },
-];
-
-function applyAccent(id) {
-  const c = ACCENT_COLORS.find(a => a.id === id) || ACCENT_COLORS[0];
-  document.documentElement.style.setProperty('--accent', c.hex);
-  document.documentElement.style.setProperty('--accent-2', c.hex2);
-  S.accent = c.id;
-  try { localStorage.setItem('mn_accent', c.id); } catch {}
-  document.querySelectorAll('.accent-swatch').forEach(el => el.classList.toggle('active', el.dataset.accent === c.id));
-}
-function setAccent(id) { applyAccent(id); }
-
-function renderSettingsPage() {
-  const el = document.getElementById('accentGrid');
-  if (!el) return;
-  el.innerHTML = ACCENT_COLORS.map(c => `
-    <div class="accent-item">
-      <button class="accent-swatch${S.accent === c.id ? ' active' : ''}" data-accent="${c.id}"
-        style="background:linear-gradient(135deg,${c.hex},${c.hex2})" title="${esc(c.name)}" onclick="setAccent('${c.id}')">
-        <span class="icon filled">check</span>
-      </button>
-      <span class="accent-name">${esc(c.name)}</span>
-    </div>`).join('');
-}
-
 // ── Server console ───────────────────────────────────────────────
 function pushLog(line) {
   const stamp = new Date().toLocaleTimeString([], { hour12: false });
@@ -1086,7 +1028,7 @@ function showLanguages() {
 // ══════════════════════════════════════════════════════════════════
 // CONFIG PAGE
 // ══════════════════════════════════════════════════════════════════
-// Every config section Meshnatter can read and write. `kind` says which
+// Every config section Nullmesh can read and write. `kind` says which
 // AdminMessage family it belongs to; the server registry in server/server.js
 // mirrors this list and is what actually validates writes.
 // Field types: bool | enum | number | float | text | password
@@ -1208,7 +1150,7 @@ const CFG_SECTIONS = {
     label:'Network', kind:'config',
     cards:[
       { title:'Wi-Fi',
-        desc:'The radio joins your Wi-Fi as a client. This is how Meshnatter talks to it — changing it will drop the connection until the node rejoins.',
+        desc:'The radio joins your Wi-Fi as a client. This is how Nullmesh talks to it — changing it will drop the connection until the node rejoins.',
         fields:[
           {key:'wifiEnabled', label:'Wi-Fi enabled', type:'bool',
            help:'Turn the Wi-Fi radio on. Wi-Fi and Bluetooth cannot both be used on ESP32 boards.'},
@@ -1325,7 +1267,7 @@ const CFG_SECTIONS = {
     label:'Bluetooth', kind:'config',
     cards:[
       { title:'Pairing',
-        desc:'How a phone pairs with this radio. On ESP32 boards Bluetooth and Wi-Fi cannot both be on — turning this on may drop Meshnatter’s connection.',
+        desc:'How a phone pairs with this radio. On ESP32 boards Bluetooth and Wi-Fi cannot both be on — turning this on may drop Nullmesh’s connection.',
         fields:[
           {key:'enabled', label:'Bluetooth enabled', type:'bool', help:'Turn the Bluetooth radio on.'},
           {key:'mode', label:'Pairing mode', type:'enum', enum:'pairingMode',
@@ -1542,7 +1484,7 @@ const CFG_SECTIONS = {
           {key:'allowUndefinedPinAccess', label:'Allow any pin', type:'bool',
            help:'Off restricts access to the pins listed on the node. On exposes every GPIO — risky.'},
         ],
-        note:'The named pin list is not editable from Meshnatter — use the official Meshtastic client for that. Whatever the node already has is left untouched when you save here.'},
+        note:'The named pin list is not editable from Nullmesh — use the official Meshtastic client for that. Whatever the node already has is left untouched when you save here.'},
     ],
   },
 
@@ -1673,7 +1615,7 @@ function renderConfigPage() {
     el.innerHTML = `<div class="cfg-wrap">${subTabs}<div class="page-empty">
       <span class="icon xl">settings_ethernet</span>
       <div class="page-empty-title">Not connected</div>
-      <div class="page-empty-sub">Connect to your node and Meshnatter will read its ${esc(def.label.toLowerCase())} config.</div>
+      <div class="page-empty-sub">Connect to your node and Nullmesh will read its ${esc(def.label.toLowerCase())} config.</div>
     </div></div>`;
     return;
   }
@@ -1682,7 +1624,7 @@ function renderConfigPage() {
     el.innerHTML = `<div class="cfg-wrap">${subTabs}<div class="page-empty">
       <span class="icon xl">downloading</span>
       <div class="page-empty-title">Reading ${esc(def.label.toLowerCase())} config…</div>
-      <div class="page-empty-sub">Meshnatter asked the radio for these settings. This takes a few seconds
+      <div class="page-empty-sub">Nullmesh asked the radio for these settings. This takes a few seconds
         over Wi-Fi. <button class="link-btn" onclick="refreshConfigSection('${section}')">Ask again</button></div>
     </div></div>`;
     return;
@@ -1710,7 +1652,7 @@ function renderConfigPage() {
       <button class="btn-primary" onclick="saveConfigSection('${section}')"><span class="icon sm">save</span> Save to node</button>
     </div>
     <p class="cfg-note">Saving writes the whole ${esc(def.label)} block to the radio and commits it. The radio may
-      briefly restart its settings, then Meshnatter re-reads the values so you can confirm they stuck.</p>
+      briefly restart its settings, then Nullmesh re-reads the values so you can confirm they stuck.</p>
   </div>`;
 }
 
@@ -1836,16 +1778,6 @@ if (document.readyState === 'loading') {
 }
 
 function init() {
-  // Theme
-  let theme = 'dark';
-  try { theme = localStorage.getItem('mn_theme') || 'dark'; } catch {}
-  applyTheme(theme);
-
-  // Accent colour
-  let accent = 'lime';
-  try { accent = localStorage.getItem('mn_accent') || 'lime'; } catch {}
-  applyAccent(accent);
-
   // Remember the last node IP the user connected to
   try {
     const lastIp = localStorage.getItem('mn_last_ip');

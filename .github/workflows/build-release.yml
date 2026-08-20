@@ -57,7 +57,7 @@ jobs:
       - name: Upload installer as workflow artifact
         uses: actions/upload-artifact@v4
         with:
-          name: meshnatter-windows-installer
+          name: nullmesh-windows-installer
           path: dist/*.exe
           if-no-files-found: error
 

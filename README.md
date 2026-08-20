@@ -2,7 +2,7 @@
 
 <img src="assets/icon512.png" width="150" />
 
-# MeshNatter
+# Nullmesh
 ### Your Desktop Gateway to the Meshtastic Network
 
 </div>
@@ -12,7 +12,7 @@
 ---
 
 ## Overview
-MeshNatter is a Windows desktop application designed to bridge the gap between your PC and the Meshtastic network. It allows users to connect to Meshtastic nodes over IP, providing an interface for network visualization, mapping, and messaging.
+Nullmesh is a Windows desktop application designed to bridge the gap between your PC and the Meshtastic network. It allows users to connect to Meshtastic nodes over IP, providing an interface for network visualization, mapping, and messaging.
 
 ## Key Features
 * **IP Connectivity:** Connect to Meshtastic nodes directly via TCP/IP or Wi-Fi.

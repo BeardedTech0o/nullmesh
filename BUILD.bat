@@ -1,15 +1,15 @@
 @echo off
-title Meshnatter Builder
+title Nullmesh Builder
 pushd "%~dp0"
 
 if not exist "package.json" (
-  echo ERROR: Run this from the meshsense2 folder. Current: %CD%
+  echo ERROR: Run this from the nullmesh folder. Current: %CD%
   pause & popd & exit /b 1
 )
 
 echo.
 echo  ===================================
-echo   Meshnatter - Building installer
+echo   Nullmesh - Building installer
 echo  ===================================
 echo  Folder: %CD%
 echo.
