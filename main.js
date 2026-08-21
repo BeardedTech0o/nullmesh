@@ -15,11 +15,11 @@ let appPort = 3000;
 // release artifacts (electron-updater would need latest.yml published
 // alongside the installer and would add weight to the packaged app).
 const UPDATE_REPO = 'BeardedTech0o/meshnatter';
-const UPDATE_ASSET_RE = /^Nullmesh-Setup-.*\.exe$/i;   // matches build.nsis.artifactName
+const UPDATE_ASSET_RE = /^nullmesh-setup-.*\.exe$/i;   // matches build.nsis.artifactName
 
 function ghHeaders() {
   const headers = {
-    'User-Agent': 'Nullmesh-Updater',
+    'User-Agent': 'nullmesh-updater',
     'Accept': 'application/vnd.github+json',
   };
   // Public repos need no token; support one anyway so a private repo just works later.
@@ -97,9 +97,9 @@ async function checkForUpdates() {
       buttons: ['Download & Install', 'Later'],
       defaultId: 0,
       cancelId: 1,
-      title: 'Nullmesh update available',
-      message: `Nullmesh ${String(latest).replace(/^v/i, '')} is available.`,
-      detail: `You are running ${current}. Download the installer (${Math.round((asset.size || 0) / 1048576)} MB) and run it now?\n\nNullmesh will close so the installer can replace its files.`,
+      title: 'nullmesh update available',
+      message: `nullmesh ${String(latest).replace(/^v/i, '')} is available.`,
+      detail: `You are running ${current}. Download the installer (${Math.round((asset.size || 0) / 1048576)} MB) and run it now?\n\nnullmesh will close so the installer can replace its files.`,
       noLink: true,
     });
     if (response !== 0) { console.log('[update] User deferred update'); return; }
@@ -132,7 +132,7 @@ function startServer(port) {
     require('./server.bundle.cjs');
     console.log('[main] Server started on port', port);
   } catch (err) {
-    dialog.showErrorBox('Nullmesh Error', 'The server failed to start.\n\n' + err.message);
+    dialog.showErrorBox('nullmesh Error', 'The server failed to start.\n\n' + err.message);
     console.error('[main] Server error:', err.stack);
     app.quit();
   }
@@ -161,7 +161,7 @@ function createWindow(port) {
     minHeight: 600,
     backgroundColor: '#e6e9ee',
     frame: true,
-    title: 'Nullmesh',
+    title: 'nullmesh',
     webPreferences: {
       nodeIntegration: false,           // Never expose Node.js to renderer
       contextIsolation: true,           // Renderer isolated from main process
@@ -234,9 +234,9 @@ function createTray() {
   try {
     const img = nativeImage.createFromPath(path.join(__dirname, 'assets', 'icon.ico'));
     tray = new Tray(img.isEmpty() ? nativeImage.createEmpty() : img);
-    tray.setToolTip('Nullmesh');
+    tray.setToolTip('nullmesh');
     tray.setContextMenu(Menu.buildFromTemplate([
-      { label: 'Nullmesh', enabled: false }, { type: 'separator' },
+      { label: 'nullmesh', enabled: false }, { type: 'separator' },
       { label: 'Show', click: () => mainWindow?.show() },
       { type: 'separator' },
       { label: 'Quit', click: () => { app.isQuitting = true; app.quit(); } },
@@ -259,7 +259,7 @@ if (!app.requestSingleInstanceLock()) {
 
     try { await waitForWS(appPort); }
     catch (e) {
-      dialog.showErrorBox('Nullmesh', 'Server did not start:\n\n' + e.message);
+      dialog.showErrorBox('nullmesh', 'Server did not start:\n\n' + e.message);
       app.quit(); return;
     }
 

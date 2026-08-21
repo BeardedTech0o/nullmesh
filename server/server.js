@@ -1,5 +1,5 @@
 /**
- * Nullmesh server — HTTP polling for Heltec V3
+ * nullmesh server — HTTP polling for Heltec V3
  * ES module source — bundled to CJS by esbuild before packaging
  */
 import { createServer } from 'http';
@@ -70,7 +70,7 @@ const RECONNECT_MS = 5000;
 // Minimal HTTP server — only used for the TCP readiness check
 // index.html is loaded directly by Electron as a local file
 const httpServer = createServer((req, res) => {
-  res.writeHead(200); res.end('Nullmesh server running');
+  res.writeHead(200); res.end('nullmesh server running');
 });
 
 const wss = new WebSocketServer({ server: httpServer });
@@ -82,7 +82,7 @@ let myNodeNum = null;              // learned from the myInfo FromRadio frame
 let sessionPasskey = null;         // echoed back by the node on admin responses
 const lastConfig = {};             // section -> whitelisted JSON view (sent to the UI)
 const lastConfigRaw = {};          // section -> decoded protobuf message (kept so writes
-                                   //   preserve fields Nullmesh does not expose)
+                                   //   preserve fields nullmesh does not expose)
 const configRefreshTimers = {};
 
 function broadcast(obj) {
@@ -145,7 +145,7 @@ const CONFIG_ENUMS = {
 };
 
 // ── Section registry ──────────────────────────────────────────────────────
-// Every config section Nullmesh can read/write. `fields` is the whitelist:
+// Every config section nullmesh can read/write. `fields` is the whitelist:
 // anything the renderer sends that is not listed here is dropped, and every
 // listed value is range-checked before it goes anywhere near the radio.
 // Kinds: bool | string | uint (unsigned int) | sint (signed int) | float
@@ -476,7 +476,7 @@ async function setConfigSection(name, patch) {
   if (!sec) throw new Error(`Unknown config section: ${name}`);
   if (!patch || typeof patch !== 'object') throw new Error('No config supplied');
   // set_config / set_module_config replace the whole submessage, so start from
-  // the last message the node actually sent us (which keeps fields Nullmesh
+  // the last message the node actually sent us (which keeps fields nullmesh
   // does not expose, e.g. LoRa ignoreIncoming or remote hardware pin lists)
   // and lay the validated patch on top.
   const merged = { ...(lastConfigRaw[name] || {}) };

@@ -46,7 +46,7 @@ function connectWS() {
   S.ws.onopen = () => {
     clearInterval(S.wsTimer);
     S.wsTimer = setInterval(() => { try { S.ws.send(JSON.stringify({type:'ping'})); } catch {} }, 20000);
-    sysMsg('Connected to Nullmesh server');
+    sysMsg('Connected to nullmesh server');
   };
   S.ws.onclose = () => { clearInterval(S.wsTimer); sysMsg('Reconnecting...'); setTimeout(connectWS, 2000); };
   S.ws.onerror = () => {};
@@ -531,14 +531,14 @@ function renderChannelHeader(){
 function renderDMThread(){
   renderDMHeader();
   const id=S.activeDM;
-  let title='Nullmesh', sub='Connect to get started';
+  let title='nullmesh', sub='Connect to get started';
   if(id){ const num=parseInt(id.slice(3)); title=S.nodes[num]?.name||numToId(num); sub='No messages — say something!'; }
   renderThreadInto('msgFeed', id, title, sub);
 }
 function renderChannelThread(){
   renderChannelHeader();
   const id=S.activeChannel;
-  let title='Nullmesh', sub='Select a channel on the left to see its broadcasts';
+  let title='nullmesh', sub='Select a channel on the left to see its broadcasts';
   if(id){ const idx=parseInt(id.slice(3)); title=S.channels[idx]?.name||'Channel'; sub='No messages yet'; }
   renderThreadInto('msgFeed2', id, title, sub);
 }
@@ -945,13 +945,13 @@ function updateIdentity() {
   if (!nameEl || !subEl) return;
   const me = S.myNodeNum != null ? S.nodes[S.myNodeNum] : null;
   if (S.connected && me) {
-    nameEl.textContent = me.shortName && me.shortName !== '???' ? me.shortName : (me.name || 'Nullmesh');
+    nameEl.textContent = me.shortName && me.shortName !== '???' ? me.shortName : (me.name || 'nullmesh');
     subEl.textContent  = 'Meshtastic ' + (me.name || numToId(me.num));
   } else if (S.connected && S.myNodeNum != null) {
     nameEl.textContent = numToId(S.myNodeNum);
     subEl.textContent  = 'Meshtastic node';
   } else {
-    nameEl.textContent = 'Nullmesh';
+    nameEl.textContent = 'nullmesh';
     subEl.textContent  = 'No node connected';
   }
 }
@@ -1028,7 +1028,7 @@ function showLanguages() {
 // ══════════════════════════════════════════════════════════════════
 // CONFIG PAGE
 // ══════════════════════════════════════════════════════════════════
-// Every config section Nullmesh can read and write. `kind` says which
+// Every config section nullmesh can read and write. `kind` says which
 // AdminMessage family it belongs to; the server registry in server/server.js
 // mirrors this list and is what actually validates writes.
 // Field types: bool | enum | number | float | text | password
@@ -1150,7 +1150,7 @@ const CFG_SECTIONS = {
     label:'Network', kind:'config',
     cards:[
       { title:'Wi-Fi',
-        desc:'The radio joins your Wi-Fi as a client. This is how Nullmesh talks to it — changing it will drop the connection until the node rejoins.',
+        desc:'The radio joins your Wi-Fi as a client. This is how nullmesh talks to it — changing it will drop the connection until the node rejoins.',
         fields:[
           {key:'wifiEnabled', label:'Wi-Fi enabled', type:'bool',
            help:'Turn the Wi-Fi radio on. Wi-Fi and Bluetooth cannot both be used on ESP32 boards.'},
@@ -1267,7 +1267,7 @@ const CFG_SECTIONS = {
     label:'Bluetooth', kind:'config',
     cards:[
       { title:'Pairing',
-        desc:'How a phone pairs with this radio. On ESP32 boards Bluetooth and Wi-Fi cannot both be on — turning this on may drop Nullmesh’s connection.',
+        desc:'How a phone pairs with this radio. On ESP32 boards Bluetooth and Wi-Fi cannot both be on — turning this on may drop nullmesh’s connection.',
         fields:[
           {key:'enabled', label:'Bluetooth enabled', type:'bool', help:'Turn the Bluetooth radio on.'},
           {key:'mode', label:'Pairing mode', type:'enum', enum:'pairingMode',
@@ -1484,7 +1484,7 @@ const CFG_SECTIONS = {
           {key:'allowUndefinedPinAccess', label:'Allow any pin', type:'bool',
            help:'Off restricts access to the pins listed on the node. On exposes every GPIO — risky.'},
         ],
-        note:'The named pin list is not editable from Nullmesh — use the official Meshtastic client for that. Whatever the node already has is left untouched when you save here.'},
+        note:'The named pin list is not editable from nullmesh — use the official Meshtastic client for that. Whatever the node already has is left untouched when you save here.'},
     ],
   },
 
@@ -1615,7 +1615,7 @@ function renderConfigPage() {
     el.innerHTML = `<div class="cfg-wrap">${subTabs}<div class="page-empty">
       <span class="icon xl">settings_ethernet</span>
       <div class="page-empty-title">Not connected</div>
-      <div class="page-empty-sub">Connect to your node and Nullmesh will read its ${esc(def.label.toLowerCase())} config.</div>
+      <div class="page-empty-sub">Connect to your node and nullmesh will read its ${esc(def.label.toLowerCase())} config.</div>
     </div></div>`;
     return;
   }
@@ -1624,7 +1624,7 @@ function renderConfigPage() {
     el.innerHTML = `<div class="cfg-wrap">${subTabs}<div class="page-empty">
       <span class="icon xl">downloading</span>
       <div class="page-empty-title">Reading ${esc(def.label.toLowerCase())} config…</div>
-      <div class="page-empty-sub">Nullmesh asked the radio for these settings. This takes a few seconds
+      <div class="page-empty-sub">nullmesh asked the radio for these settings. This takes a few seconds
         over Wi-Fi. <button class="link-btn" onclick="refreshConfigSection('${section}')">Ask again</button></div>
     </div></div>`;
     return;
@@ -1652,7 +1652,7 @@ function renderConfigPage() {
       <button class="btn-primary" onclick="saveConfigSection('${section}')"><span class="icon sm">save</span> Save to node</button>
     </div>
     <p class="cfg-note">Saving writes the whole ${esc(def.label)} block to the radio and commits it. The radio may
-      briefly restart its settings, then Nullmesh re-reads the values so you can confirm they stuck.</p>
+      briefly restart its settings, then nullmesh re-reads the values so you can confirm they stuck.</p>
   </div>`;
 }
 

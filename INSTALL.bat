@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo  Nullmesh - Installing dependencies
+echo  nullmesh - Installing dependencies
 echo  This only needs to run once.
 echo.
 
@@ -17,5 +17,5 @@ echo  Node.js found. Installing packages...
 npm install
 
 echo.
-echo  Done! Run START.bat to launch Nullmesh.
+echo  Done! Run START.bat to launch nullmesh.
 pause

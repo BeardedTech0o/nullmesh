@@ -1,5 +1,5 @@
 @echo off
-title Nullmesh Builder
+title nullmesh Builder
 pushd "%~dp0"
 
 if not exist "package.json" (
@@ -9,7 +9,7 @@ if not exist "package.json" (
 
 echo.
 echo  ===================================
-echo   Nullmesh - Building installer
+echo   nullmesh - Building installer
 echo  ===================================
 echo  Folder: %CD%
 echo.
