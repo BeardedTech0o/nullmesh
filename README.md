@@ -25,13 +25,13 @@ nullmesh is a Windows app that connects to a Meshtastic node over IP. It gives y
 
 ## Installation
 
-Want to run it? Get the latest installer from [Releases](https://github.com/BeardedTech0o/meshnatter/releases). It is a standard Windows .exe. No Node.js or command line required.
+Want to run it? Get the latest installer from [Releases](https://github.com/BeardedTech0o/nullmesh/releases). It is a standard Windows .exe. No Node.js or command line required.
 
 Building from source:
 
 ```bash
-git clone https://github.com/BeardedTech0o/meshnatter.git
-cd meshnatter
+git clone https://github.com/BeardedTech0o/nullmesh.git
+cd nullmesh
 pnpm install
 pnpm start
 ```

@@ -14,7 +14,7 @@ let appPort = 3000;
 // Plain GitHub Releases check — no extra runtime dependency, no extra
 // release artifacts (electron-updater would need latest.yml published
 // alongside the installer and would add weight to the packaged app).
-const UPDATE_REPO = 'BeardedTech0o/meshnatter';
+const UPDATE_REPO = 'BeardedTech0o/nullmesh';
 const UPDATE_ASSET_RE = /^nullmesh-setup-.*\.exe$/i;   // matches build.nsis.artifactName
 
 function ghHeaders() {
