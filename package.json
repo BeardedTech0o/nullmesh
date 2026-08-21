@@ -44,6 +44,7 @@
     "files": [
       "main.js",
       "index.html",
+      "tokens.css",
       "styles.css",
       "app.js",
       "server.bundle.cjs",
