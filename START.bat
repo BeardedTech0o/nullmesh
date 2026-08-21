@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo  Starting Nullmesh...
+echo  Starting nullmesh...
 echo  Your browser will open automatically.
 echo  Close this window to stop.
 echo.
