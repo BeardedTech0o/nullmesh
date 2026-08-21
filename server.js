@@ -1,5 +1,5 @@
 /**
- * MeshSense server.js - HTTP polling for Heltec V3
+ * Nullmesh server.js - HTTP polling for Heltec V3
  * More robust connection with retry logic and better error handling
  */
 import { createServer } from 'http';
@@ -300,7 +300,7 @@ wss.on('connection', ws => {
 
 httpServer.listen(SERVER_PORT, () => {
   console.log(`\n╔══════════════════════════════════════╗`);
-  console.log(`║  MeshSense — http://localhost:${SERVER_PORT}    ║`);
+  console.log(`║  Nullmesh — http://localhost:${SERVER_PORT}    ║`);
   console.log(`╚══════════════════════════════════════╝\n`);
   if (process.platform === 'win32') {
     import('child_process').then(({ exec }) => exec(`start http://localhost:${SERVER_PORT}`));

@@ -1,10 +1,10 @@
 {
-  "name": "meshnatter",
+  "name": "nullmesh",
   "version": "1.0.10",
-  "description": "Meshnatter — Meshtastic Network Monitor",
+  "description": "Nullmesh — Meshtastic Network Monitor",
   "main": "main.js",
   "type": "commonjs",
-  "author": "Meshnatter",
+  "author": "Nullmesh",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -33,8 +33,8 @@
     ]
   },
   "build": {
-    "appId": "com.meshnatter.app",
-    "productName": "Meshnatter",
+    "appId": "com.nullmesh.app",
+    "productName": "Nullmesh",
     "asar": true,
     "compression": "maximum",
     "directories": {
@@ -76,11 +76,11 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "Meshnatter",
+      "shortcutName": "Nullmesh",
       "installerIcon": "assets/icon.ico",
       "uninstallerIcon": "assets/icon.ico",
       "installerHeaderIcon": "assets/icon.ico",
-      "artifactName": "Meshnatter-Setup-${version}.${ext}"
+      "artifactName": "Nullmesh-Setup-${version}.${ext}"
     }
   }
 }

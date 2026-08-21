@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo  MeshSense - Installing dependencies
+echo  Nullmesh - Installing dependencies
 echo  This only needs to run once.
 echo.
 
@@ -17,5 +17,5 @@ echo  Node.js found. Installing packages...
 npm install
 
 echo.
-echo  Done! Run START.bat to launch MeshSense.
+echo  Done! Run START.bat to launch Nullmesh.
 pause

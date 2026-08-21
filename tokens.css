@@ -1,0 +1,46 @@
+/* nullxx design system — light mode v1
+   Generated from tokens.json. Edit tokens.json first, then regenerate. */
+
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;300;400;500;600;700;800;900&display=swap');
+
+:root {
+  /* Colour */
+  --colour-surface-base: #e6e9ee;
+  --colour-surface-card: #e6e9ee;
+  --colour-shadow-dark: #ccd0d6;
+  --colour-shadow-light: #ffffff;
+  --colour-text-primary: #3a3f4a;
+  --colour-text-secondary: #767c88;
+  --colour-accent-teal: #2f8a8a;
+  --colour-accent-teal-light: #6fc4c4;
+  --colour-border-hairline: #d3d7dd;
+
+  /* Radius */
+  --radius-card: 22px;
+  --radius-control: 13px;
+  --radius-badge: 20px;
+  --radius-progress: 6px;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 20px;
+  --space-2xl: 24px;
+  --space-3xl: 32px;
+
+  /* Shadow */
+  --shadow-card-raised: 2px 2px 5px var(--colour-shadow-dark), -2px -2px 5px var(--colour-shadow-light);
+  --shadow-card-inset: inset 1px 1px 2px var(--colour-shadow-dark), inset -1px -1px 2px var(--colour-shadow-light);
+  --shadow-control-raised: 2px 2px 4px var(--colour-shadow-dark), -2px -2px 4px var(--colour-shadow-light);
+
+  /* Typography */
+  --font-family-base: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-heading: 1rem;
+  --font-weight-heading: 700;
+  --font-size-body: 0.78rem;
+  --font-weight-body: 400;
+  --font-size-label: 0.66rem;
+  --font-weight-label: 600;
+}

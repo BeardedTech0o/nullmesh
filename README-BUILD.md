@@ -1,4 +1,4 @@
-# MeshSense — Building the Installer
+# Nullmesh — Building the Installer
 
 ## To build the Windows installer (.exe)
 
@@ -7,17 +7,17 @@
 1. Open this folder
 2. Double-click **BUILD.bat**
 3. Wait ~2 minutes for dependencies to download
-4. The installer appears in the `dist/` folder as `MeshSense Setup 1.0.0.exe`
+4. The installer appears in the `dist/` folder as `Nullmesh-Setup-1.0.0.exe`
 
 ## Sharing
 
-Send people the single `MeshSense Setup 1.0.0.exe` file.
+Send people the single `Nullmesh-Setup-1.0.0.exe` file.
 They double-click it, click through the installer, done.
 No Node.js, no command line, nothing else needed.
 
 ## What the installer includes
 
-- The full MeshSense app
+- The full Nullmesh app
 - Bundled Node.js runtime (users don't need it installed)
 - Creates a Start Menu shortcut and optional Desktop shortcut
 - Adds an Add/Remove Programs entry for clean uninstall

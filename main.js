@@ -15,15 +15,15 @@ let appPort = 3000;
 // release artifacts (electron-updater would need latest.yml published
 // alongside the installer and would add weight to the packaged app).
 const UPDATE_REPO = 'BeardedTech0o/meshnatter';
-const UPDATE_ASSET_RE = /^Meshnatter-Setup-.*\.exe$/i;   // matches build.nsis.artifactName
+const UPDATE_ASSET_RE = /^Nullmesh-Setup-.*\.exe$/i;   // matches build.nsis.artifactName
 
 function ghHeaders() {
   const headers = {
-    'User-Agent': 'Meshnatter-Updater',
+    'User-Agent': 'Nullmesh-Updater',
     'Accept': 'application/vnd.github+json',
   };
   // Public repos need no token; support one anyway so a private repo just works later.
-  const token = process.env.MESHNATTER_GITHUB_TOKEN || process.env.GITHUB_TOKEN;
+  const token = process.env.NULLMESH_GITHUB_TOKEN || process.env.GITHUB_TOKEN;
   if (token) headers.Authorization = `Bearer ${token}`;
   return headers;
 }
@@ -97,9 +97,9 @@ async function checkForUpdates() {
       buttons: ['Download & Install', 'Later'],
       defaultId: 0,
       cancelId: 1,
-      title: 'Meshnatter update available',
-      message: `Meshnatter ${String(latest).replace(/^v/i, '')} is available.`,
-      detail: `You are running ${current}. Download the installer (${Math.round((asset.size || 0) / 1048576)} MB) and run it now?\n\nMeshnatter will close so the installer can replace its files.`,
+      title: 'Nullmesh update available',
+      message: `Nullmesh ${String(latest).replace(/^v/i, '')} is available.`,
+      detail: `You are running ${current}. Download the installer (${Math.round((asset.size || 0) / 1048576)} MB) and run it now?\n\nNullmesh will close so the installer can replace its files.`,
       noLink: true,
     });
     if (response !== 0) { console.log('[update] User deferred update'); return; }
@@ -127,12 +127,12 @@ function findFreePort(start) {
 }
 
 function startServer(port) {
-  process.env.MESHNATTER_PORT = String(port);
+  process.env.NULLMESH_PORT = String(port);
   try {
     require('./server.bundle.cjs');
     console.log('[main] Server started on port', port);
   } catch (err) {
-    dialog.showErrorBox('Meshnatter Error', 'The server failed to start.\n\n' + err.message);
+    dialog.showErrorBox('Nullmesh Error', 'The server failed to start.\n\n' + err.message);
     console.error('[main] Server error:', err.stack);
     app.quit();
   }
@@ -159,9 +159,9 @@ function createWindow(port) {
     height: 900,
     minWidth: 800,
     minHeight: 600,
-    backgroundColor: '#000000',
+    backgroundColor: '#e6e9ee',
     frame: true,
-    title: 'Meshnatter',
+    title: 'Nullmesh',
     webPreferences: {
       nodeIntegration: false,           // Never expose Node.js to renderer
       contextIsolation: true,           // Renderer isolated from main process
@@ -234,9 +234,9 @@ function createTray() {
   try {
     const img = nativeImage.createFromPath(path.join(__dirname, 'assets', 'icon.ico'));
     tray = new Tray(img.isEmpty() ? nativeImage.createEmpty() : img);
-    tray.setToolTip('Meshnatter');
+    tray.setToolTip('Nullmesh');
     tray.setContextMenu(Menu.buildFromTemplate([
-      { label: 'Meshnatter', enabled: false }, { type: 'separator' },
+      { label: 'Nullmesh', enabled: false }, { type: 'separator' },
       { label: 'Show', click: () => mainWindow?.show() },
       { type: 'separator' },
       { label: 'Quit', click: () => { app.isQuitting = true; app.quit(); } },
@@ -246,7 +246,7 @@ function createTray() {
 }
 
 // Required for Windows taskbar pinning — keeps icon linked to the installed app
-app.setAppUserModelId('com.meshnatter.app');
+app.setAppUserModelId('com.nullmesh.app');
 
 if (!app.requestSingleInstanceLock()) {
   app.quit();
@@ -259,7 +259,7 @@ if (!app.requestSingleInstanceLock()) {
 
     try { await waitForWS(appPort); }
     catch (e) {
-      dialog.showErrorBox('Meshnatter', 'Server did not start:\n\n' + e.message);
+      dialog.showErrorBox('Nullmesh', 'Server did not start:\n\n' + e.message);
       app.quit(); return;
     }
 

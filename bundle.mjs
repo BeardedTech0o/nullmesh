@@ -16,7 +16,7 @@ await build({
   // Let esbuild inject __dirname correctly - don't fake import.meta.url
   // Instead we inject a banner that sets __dir from __dirname
   banner: {
-    js: '/* MeshSense server bundle */',
+    js: '/* Nullmesh server bundle */',
   },
 });
 
