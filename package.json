@@ -1,6 +1,6 @@
 {
   "name": "nullmesh",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "nullmesh — Meshtastic Network Monitor",
   "main": "main.js",
   "type": "commonjs",
