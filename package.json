@@ -45,6 +45,7 @@
       "main.js",
       "index.html",
       "tokens.css",
+      "fonts/**",
       "styles.css",
       "app.js",
       "server.bundle.cjs",

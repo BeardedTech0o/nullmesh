@@ -719,11 +719,11 @@ function sigColor(rssi){
   return 'var(--sig-bad)';
 }
 function sigColorHex(rssi){
-  if(rssi==null) return '#54545870';
-  if(rssi>=-100) return '#30d158';
-  if(rssi>=-110) return '#a4d65e';
-  if(rssi>=-120) return '#ff9f0a';
-  return '#ff453a';
+  if(rssi==null) return 'var(--faint)';
+  if(rssi>=-100) return 'var(--sig-ex)';
+  if(rssi>=-110) return 'var(--sig-gd)';
+  if(rssi>=-120) return 'var(--sig-ok)';
+  return 'var(--sig-bad)';
 }
 
 function renderMap(){
@@ -736,11 +736,11 @@ function renderMap(){
     const online=isOnline(n);
     const sz=sel?22:(isMe?18:14);
     // All online nodes: green filled. My node: blue filled. Offline: faded red.
-    const fill=online?(isMe?'#0a84ff':'#30d158'):'#ff453a';
+    const fill=online?(isMe?'var(--fg)':'var(--ok)'):'var(--danger)';
     const pinClass=`mesh-pin ${online?(isMe?'me-pin':'online'):'offline'}`;
     const icon=L.divIcon({
       className:'',
-      html:`<div class="${pinClass}" style="width:${sz}px;height:${sz}px;background:${fill};border:2px solid ${online?(isMe?'#5ac8fa':'#34e86a'):'#ff453a'};"></div>`,
+      html:`<div class="${pinClass}" style="width:${sz}px;height:${sz}px;background:${fill};border:2px solid var(--bg);outline:1px solid ${fill};"></div>`,
       iconSize:[sz,sz],iconAnchor:[sz/2,sz/2],tooltipAnchor:[sz/2+4,0]
     });
     if(markers[n.num]){
