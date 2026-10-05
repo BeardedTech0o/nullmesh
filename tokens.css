@@ -1,27 +1,34 @@
-/* nullxx design system — light mode v1
-   Generated from tokens.json. Edit tokens.json first, then regenerate. */
-
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;300;400;500;600;700;800;900&display=swap');
+/* nullobj design system: monochrome, one variable typeface, pill controls.
+   Theme lives on <html data-theme="light|dark">. Use tokens, never hard-code #fff or #000. */
+@import url('./fonts/fonts.css');
 
 :root {
-  /* Colour */
-  --colour-surface-base: #e6e9ee;
-  --colour-surface-card: #e6e9ee;
-  --colour-shadow-dark: #ccd0d6;
-  --colour-shadow-light: #ffffff;
-  --colour-text-primary: #3a3f4a;
-  --colour-text-secondary: #767c88;
-  --colour-accent-teal: #2f8a8a;
-  --colour-accent-teal-light: #6fc4c4;
-  --colour-border-hairline: #d3d7dd;
+  --bg: #ffffff;
+  --fg: #0a0a0a;
+  --muted: #6a6a6a;
+  --faint: #9a9a9a;
+  --line: #e6e6e6;
+  --line-strong: #cfcfcf;
+  --wash: #f5f5f5;
+  --danger: #c4262b;
+  --ok: #138a4a;
+  --warn: #b7791f;
+  --press: #333333;
 
-  /* Radius */
-  --radius-card: 22px;
-  --radius-control: 13px;
-  --radius-badge: 20px;
-  --radius-progress: 6px;
+  --font-sans: "Inter Tight Variable", "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  --tracking-tight: -0.03em;
+  --tracking-caps: 0.06em;
 
-  /* Spacing */
+  --radius-pill: 999px;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-base: 240ms;
+
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 12px;
@@ -30,17 +37,24 @@
   --space-2xl: 24px;
   --space-3xl: 32px;
 
-  /* Shadow */
-  --shadow-card-raised: 2px 2px 5px var(--colour-shadow-dark), -2px -2px 5px var(--colour-shadow-light);
-  --shadow-card-inset: inset 1px 1px 2px var(--colour-shadow-dark), inset -1px -1px 2px var(--colour-shadow-light);
-  --shadow-control-raised: 2px 2px 4px var(--colour-shadow-dark), -2px -2px 4px var(--colour-shadow-light);
+  --ring: 0 0 0 3px rgba(10, 10, 10, 0.18);
+  --shadow-pop: 0 18px 40px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.08);
+  color-scheme: light;
+}
 
-  /* Typography */
-  --font-family-base: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-size-heading: 1rem;
-  --font-weight-heading: 700;
-  --font-size-body: 0.78rem;
-  --font-weight-body: 400;
-  --font-size-label: 0.66rem;
-  --font-weight-label: 600;
+[data-theme="dark"] {
+  --bg: #0a0a0a;
+  --fg: #f4f4f4;
+  --muted: #9b9b9b;
+  --faint: #6f6f6f;
+  --line: #242424;
+  --line-strong: #3a3a3a;
+  --wash: #141414;
+  --danger: #ff7b7f;
+  --ok: #4cd08b;
+  --warn: #e0a84a;
+  --press: #cfcfcf;
+  --ring: 0 0 0 3px rgba(244, 244, 244, 0.25);
+  --shadow-pop: 0 18px 40px rgba(0, 0, 0, 0.7);
+  color-scheme: dark;
 }

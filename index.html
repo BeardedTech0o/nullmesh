@@ -9,8 +9,12 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <!-- Material Symbols (Google Icons) -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
-<!-- nullxx identity: Google Sans Flex (UI text, via tokens.css) + JetBrains Mono (numeric/technical: peer IDs, signal metrics, timestamps) -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap"/>
+<!-- nullobj: Inter Tight Variable ships in ./fonts (via tokens.css). Theme follows the OS. -->
+<script>
+(function(){var m=window.matchMedia('(prefers-color-scheme: dark)');
+function set(){document.documentElement.dataset.theme=m.matches?'dark':'light';}
+set();if(m.addEventListener)m.addEventListener('change',set);})();
+</script>
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -22,7 +26,7 @@
 
     <!-- App / node identity -->
     <div class="nav-identity">
-      <div class="nav-id-icon"><span class="icon filled" style="color:#fff;font-size:20px">cell_tower</span></div>
+      <div class="nav-id-icon"><span class="icon filled" style="font-size:20px">cell_tower</span></div>
       <div class="nav-id-text">
         <div class="nav-id-name" id="navNodeName">nullmesh</div>
         <div class="nav-id-sub" id="navNodeSub">No node connected</div>
@@ -298,7 +302,7 @@
 <!-- First-run guided connect -->
 <div class="ov first-run" id="firstRun">
   <div class="fr-card">
-    <div class="fr-icon"><span class="icon filled" style="color:#fff;font-size:28px">cell_tower</span></div>
+    <div class="fr-icon"><span class="icon filled" style="font-size:28px">cell_tower</span></div>
     <h2 class="fr-title">Connect to your Meshtastic node</h2>
     <p class="fr-body">nullmesh talks to a node on your local network over Wi-Fi. Enter the IP address your
       radio shows on its screen (or the one your router assigned it) and nullmesh will load your mesh.</p>
