@@ -10,7 +10,8 @@
   "scripts": {
     "bundle": "node bundle.mjs",
     "start": "electron .",
-    "dist": "node bundle.mjs && electron-builder --win --x64"
+    "dist": "node bundle.mjs && electron-builder --win --x64",
+    "dist:mac": "node bundle.mjs && electron-builder --mac dmg zip --x64 --arm64"
   },
   "dependencies": {
     "@bufbuild/protobuf": "^2.12.0",
@@ -71,6 +72,16 @@
       ],
       "icon": "assets/icon.ico",
       "signAndEditExecutable": true
+    },
+    "mac": {
+      "category": "public.app-category.utilities",
+      "icon": "assets/icon.png",
+      "target": [
+        { "target": "dmg", "arch": ["x64", "arm64"] },
+        { "target": "zip", "arch": ["x64", "arm64"] }
+      ],
+      "artifactName": "nullmesh-${version}-mac-${arch}.${ext}",
+      "identity": null
     },
     "nsis": {
       "oneClick": false,
