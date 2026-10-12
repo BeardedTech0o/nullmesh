@@ -11,7 +11,7 @@
     "bundle": "node bundle.mjs",
     "start": "electron .",
     "dist": "node bundle.mjs && electron-builder --win --x64",
-    "dist:mac": "node bundle.mjs && electron-builder --mac dmg zip --x64 --arm64"
+    "dist:mac": "node bundle.mjs && electron-builder --mac dmg zip --x64 --arm64 --publish never"
   },
   "dependencies": {
     "@bufbuild/protobuf": "^2.12.0",

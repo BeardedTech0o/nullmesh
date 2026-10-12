@@ -86,7 +86,7 @@ jobs:
         run: node bundle.mjs
 
       - name: Build macOS app (Intel + Apple Silicon)
-        run: pnpm exec electron-builder --mac dmg zip --x64 --arm64
+        run: pnpm exec electron-builder --mac dmg zip --x64 --arm64 --publish never
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
 
