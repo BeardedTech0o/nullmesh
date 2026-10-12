@@ -232,7 +232,11 @@ function createWindow(port) {
 
 function createTray() {
   try {
-    const img = nativeImage.createFromPath(path.join(__dirname, 'assets', 'icon.ico'));
+    // Windows reads the .ico; macOS/Linux need a PNG (and macOS wants menu bar icons small).
+    let img = process.platform === 'win32'
+      ? nativeImage.createFromPath(path.join(__dirname, 'assets', 'icon.ico'))
+      : nativeImage.createFromPath(path.join(__dirname, 'assets', 'tray.png'));
+    if (process.platform === 'darwin' && !img.isEmpty()) img = img.resize({ width: 18, height: 18 });
     tray = new Tray(img.isEmpty() ? nativeImage.createEmpty() : img);
     tray.setToolTip('nullmesh');
     tray.setContextMenu(Menu.buildFromTemplate([

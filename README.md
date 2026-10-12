@@ -6,7 +6,7 @@
 
 Meshtastic nodes talk easily to a phone over Bluetooth, but a node sitting on a shelf near your router, reachable over WiFi, is harder to see into. There was no proper desktop app for that. You had a companion app built for phones, or a browser tool that expected you to write your own client.
 
-nullmesh is a Windows app that connects to a Meshtastic node over IP. It gives you messaging, network visualization, telemetry and full device configuration in one window.
+nullmesh is a Windows and macOS app that connects to a Meshtastic node over IP. It gives you messaging, network visualization, telemetry and full device configuration in one window.
 
 ## What's Inside
 
@@ -25,7 +25,9 @@ nullmesh is a Windows app that connects to a Meshtastic node over IP. It gives y
 
 ## Installation
 
-Want to run it? Get the latest installer from [Releases](https://github.com/BeardedTech0o/nullmesh/releases). It is a standard Windows .exe. No Node.js or command line required.
+Want to run it? Get the latest installer from [Releases](https://github.com/BeardedTech0o/nullmesh/releases). Windows gets a standard .exe installer. macOS gets a .dmg (Apple Silicon and Intel). No Node.js or command line required.
+
+The Mac build is not signed or notarized, so macOS will block the first launch. Right click the app, choose Open, then confirm. If it still says the app is damaged, run `xattr -cr /Applications/nullmesh.app` once.
 
 Building from source:
 
@@ -36,7 +38,7 @@ pnpm install
 pnpm start
 ```
 
-To build your own installer, double click `BUILD.bat`, or run `pnpm dist`. See [README-BUILD.md](README-BUILD.md) for details.
+To build your own installer, double click `BUILD.bat` (Windows), or run `pnpm dist`. On a Mac, run `pnpm dist:mac`. See [README-BUILD.md](README-BUILD.md) for details.
 
 ## Contributing
 
