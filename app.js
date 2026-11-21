@@ -1434,8 +1434,8 @@ const CFG_SECTIONS = {
         fields:[
           {key:'enabled', label:'Module enabled', type:'bool', help:'Turn canned messages on.'},
           {key:'sendBell', label:'Send bell character', type:'bool', help:'Append a bell to each canned message so the receiving node alerts.'},
-          {key:'rotary1Enabled', label:'Rotary encoder input', type:'bool', help:'Use a rotary encoder to scroll the list.'},
-          {key:'updown1Enabled', label:'Up/down button input', type:'bool', help:'Use up/down buttons to scroll the list.'},
+          {key:'rotary1Enabled', label:'Rotary encoder input', type:'bool', help:'Use a rotary encoder to scroll the list.'}, // gitleaks:allow (config field name, not a secret)
+          {key:'updown1Enabled', label:'Up/down button input', type:'bool', help:'Use up/down buttons to scroll the list.'}, // gitleaks:allow (config field name, not a secret)
           {key:'allowInputSource', label:'Allowed input source', type:'text', maxlength:16,
            help:'Which input device may drive this, e.g. rotEnc1, upDownEnc1, or _any.'},
         ]},
